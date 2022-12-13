@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from email import message
 from pathlib import Path
 import os
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'realtors.apps.RealtorsConfig',
     'listings.apps.ListingsConfig',
     'pages.apps.PagesConfig',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +136,18 @@ MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# USE_THOUSAND_SEPARATOR = True
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
+
+# Email config
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'vahiddky@gmail.com'
+EMAIL_HOST_PASSWORD = 'dcaboiowrbinjkrx'
+EMAIL_USE_TLS = True
