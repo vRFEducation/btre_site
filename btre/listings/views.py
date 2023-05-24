@@ -2,6 +2,9 @@ from django.shortcuts import get_object_or_404, render
 from .models import Listing
 from django.core.paginator import Paginator
 from .choices import price_choices, state_choices, bedroom_choices
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+from .forms import ListingForm
 
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)
@@ -59,3 +62,10 @@ def search(request):
         'values': request.GET
     }
     return render(request, 'listings/search.html', context)
+
+
+class ListingCreateView(CreateView):
+    model = Listing
+    form_class = ListingForm
+    success_url = reverse_lazy('dashboard')
+    
